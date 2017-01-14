@@ -1,4 +1,5 @@
 import math
+#The value of logbase is arbitrary, but I've found it leads to an efficient sorting of primes.
 logbase = 1.005
 
 
