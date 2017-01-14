@@ -1,6 +1,10 @@
 import math
 logbase = 1.005
 
+
+#Generate lists of prime numbers that are indexed using a log function.
+#By generating this list initially, many numbers can be checked for primality
+#very quickly.
 def OrderedSieve(limit):
     j = 2
     PrimeList = [True]*limit
@@ -11,7 +15,7 @@ def OrderedSieve(limit):
                    
     degree = 0
 
-#set all of the composite number indices to False
+    #set all of the composite number indices to False
     for i in range(2,limit):
         if PrimeList[i] == True:
             while i*j < limit:
@@ -20,7 +24,7 @@ def OrderedSieve(limit):
 
         j = 2
 
-#create an indexed list of lists containing all prime numbers in a given range
+    #create an indexed list of lists containing all prime numbers in a given range
     j = 1        
     for i in range(2, limit):
         degree = math.floor(math.log(i,logbase))
@@ -28,12 +32,16 @@ def OrderedSieve(limit):
             PrimesSorted[degree].append(i)
     return PrimesSorted
 
+
+#A simple sieve technique to create a single long list of all prime numbers below "limit".
+#This is useful for generating a list of primes to iterate through. Not as efficient for
+#generating a list of primes to find a specific value in.
 def Sieve(limit):
     j = 2
     PrimeList = [True]*limit
     Primes = []
 
-#set all of the composite number indices to False
+    #Set all of the composite number indices to False
     for i in range(2,limit):
         if PrimeList[i] == True:
             while i*j < limit:
@@ -42,7 +50,7 @@ def Sieve(limit):
 
         j = 2
         
-#create a single list containing all prime numbers under a given limit
+    #Create a single list containing all prime numbers under a given limit
     j = 1        
     for i in range(2, limit):
         if PrimeList[i] == True:
@@ -50,7 +58,9 @@ def Sieve(limit):
     return Primes
 
 
-#function to determine if a number is prime
+#Function to determine if a number is prime.
+#A list called PrimesSorted should be initialized using the OrderedSieve function
+#before this function is used
 def PrimeCheck(num):
     degree = math.floor(math.log(num,logbase))
     PrimesList = PrimesSorted[degree]
@@ -65,12 +75,7 @@ def PrimeCheck(num):
 
 
 
-'''
-print("there are",len(primelist), "different lists")
-for i in range(len(primelist)):
-    print(i, " - ", len(primelist[i]))
-'''
-
+#Example of simple application using these tools.
 num = 1000000
 PrimesSorted = OrderedSieve(num+1)
 
