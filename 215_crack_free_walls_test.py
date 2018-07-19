@@ -20,3 +20,8 @@ for i in options:
 
 
 print(total)
+
+
+row_options = {}
+
+while(
