@@ -26,27 +26,25 @@ def s_n(n, k=2, limit = 61):
 
 
 
-"""
+
 n = 1002
 
-for i in range(2,n-1):
-    print(s_n(n,i))
 
-
+target = 60
 sum_60s = 0
+hits = []
 
-for i in range(4, 100000):
-    if(s_n(2*i) == 60):
-        if(s_n(2*i,3)==60):
-            sum_60s = sum_60s + 2*i
-        else:
-            print(2*i)
+for i in range(2*10**7, 4*10**7):
+    if(s_n(2*i) == target):
+        sum_60s = sum_60s + 2*i
+        hits.append(2*i)
 
 print(sum_60s)
+
+plt.plot(hits,'o')
+plt.show()
+
 """
-
-
-
 # Create some plots to show the behavior of the s_n function
 x = np.arange(4,100000,2)
 y = []
@@ -58,4 +56,7 @@ plt.show()
 
 # CONCLUSION: The function has a lower bound of log2(n). s_n(n) >= log2(n)
 #   Furthermore, when n is a power of 2, s_n(n)= log2(n)
+#   This isn't a very useful lower bound.
+#
 #   There are likely more lower bounding functions, as the data appear to have many patterns.
+"""
