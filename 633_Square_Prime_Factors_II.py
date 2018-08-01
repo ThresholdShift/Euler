@@ -1,17 +1,13 @@
 # PE633 - Square Prime Factors II
 import math
 
-
-# Approach:
-# 1 - Find list of primes less than or equal to N.
-# 2 - Multiply each number in list by every other number in list.
-# 3 - If squares are less than or equal to N, increment C sum.
-# 4 - Any non-squares that are less or equal to the square root on N
-#     are added to the list.
-# 5 - Repeat from step 2, by multiplying new entries by full list.
-# 6 - Stop when every product is greater than N.
-
-
+# ~~Procedure~~
+# 1 - Get a list of Primes
+# 2 - Square each prime.
+# 3 - If the square is less than or equal to N, increment C_sum.
+# 4 - If the square is less than or equal to half N, add it to a new list.
+# 5 - Multiply each entry in this new list by each number in the primes list.
+# 6 - Repeat from Step 3 while all entries in the new list are less than N
 
 #A simple sieve technique to create a single long list of all prime numbers below "limit".
 #This is useful for generating a list of primes to iterate through. Not as efficient for
@@ -38,36 +34,30 @@ def Sieve(limit):
     return Primes
 
 
-S
+
 N = 10
 rootN = math.floor(math.sqrt(N))
 
-
-
-
-
-
-
-"""
-numList = list(Sieve(N))
+primes = list(Sieve(N))
+products = primes  # Start with the products as the primes so it produces the squares of primes
+newList = list((N-1,)) # Start with one entry less than N so the loop happens once
 C_sum = 0
-minProd = rootN
-newIndex = 0
 
-while(minProd <= N):
+while(newList[0]<N):
+    print(newList[0])
     newList = list()
-    for i in range(newIndex,len(numList)):
-        for j in numList:
+    for i in primes:
+        for j in products:
             prod = i*j
-            if(i == j)&(prod<=N):
+            if(prod<=N):
                 C_sum = C_sum + 1
-            elif(prod<=rootN):
-                newList.add(prod)
-"""
+                if(prod<=N/2):
+                    newList.append(prod)
+    products.extend(newList)
+    products.sort()
+    
 
-
-
-
+print(C_sum)
 
 
 
